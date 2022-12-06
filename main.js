@@ -38,18 +38,34 @@ var gravity = 0;
 // if keyis not up, increase the bird y's axis
 // else decrease till the person presses it
 
-document.addEventListener("keydown", moveUp);
-function moveUp(){
+document.addEventListener("keydown", () =>{
     by-=30;
-}
+});
+
+// document.addEventListener("keydown", moveUp);
+
+// function    moveUp(){
+//     by-=30;
+// }
 
 
+// pipe coordinates
+var pipe1 = [];
+
+
+pipe1[0] = {
+    x: canvas.width,
+    y: 0
+};
+
+ 
     bg.onload = function background() {
 
         ctx.drawImage(bg, bgx, bgy, bgh, bgw);
         requestAnimationFrame(background);
     }
    
+    
      // load the images
      bird.onload = function birdmove() {
         // Draw the image onto the context
@@ -60,16 +76,27 @@ function moveUp(){
     }
   
     
+    var constant=400;
     
     pipe_north.onload = function northPole(){
-        ctx.drawImage(pipe_north, pnx, pny, pnh, pnw);
+        for(var i=0; i <pipe1.length; i++){
+        ctx.drawImage(pipe_north , pipe1[i].x, pipe1[i].y, pnh, pnw);
+        // subtract the coordinates
+        pipe1[i].x = pipe1[i].x-0;
+        }
         requestAnimationFrame(northPole);
     }
     
     pipe_south.onload = function southPole(){
-        ctx.drawImage(pipe_south, psx, psy, psh, psw);
+        for(var i=0; i <pipe1.length; i++){
+        
+        ctx.drawImage(pipe_south, pipe1[i].x, pipe1[i].y+constant, psh, psw);
+
+        pipe1[i].x--;
+        }
         requestAnimationFrame(southPole);
     }
+    
 
     ground.onload = function ground_me(){
         ctx.drawImage(ground, 0, canvas.height - psh);
@@ -78,13 +105,14 @@ function moveUp(){
      
     
 
+
 // window.requestAnimationFrame(draw);
 
 
 
 
- 
-   
+
+
 
 
    
