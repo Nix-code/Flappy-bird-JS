@@ -28,9 +28,9 @@ var bx = 50, bh = 90, bw = 140;
 var by = 90;
 
 // dimension for the north pipe
-var pnx = 105, pny = 0, pnh = 250, pnw = 250;
+var pnx = 105, pny = 0, pnw = 250, pnh = 250;
 // dimension for the south pipe
-var psx = 105, psy = 450, psh = 250, psw = 250;
+var psx = 105, psy = 450, psw = 250, psh = 250;
 // gravity
 var gravity = 0;
 
@@ -55,7 +55,8 @@ var pipe1 = [];
 
 pipe1[0] = {
     x: canvas.width,
-    y: 0
+    y: 0,
+    h:250
 };
 
  
@@ -74,7 +75,7 @@ pipe1[0] = {
         //  console.log(by);
          requestAnimationFrame(birdmove);
     }
-  
+
     
     var constant=400;
     
@@ -82,7 +83,9 @@ pipe1[0] = {
         for(var i=0; i <pipe1.length; i++){
         ctx.drawImage(pipe_north , pipe1[i].x, pipe1[i].y, pnh, pnw);
         // subtract the coordinates
-        pipe1[i].x = pipe1[i].x-0;
+        pipe1[i].x = pipe1[i].x--;
+       
+       
         }
         requestAnimationFrame(northPole);
     }
@@ -93,6 +96,15 @@ pipe1[0] = {
         ctx.drawImage(pipe_south, pipe1[i].x, pipe1[i].y+constant, psh, psw);
 
         pipe1[i].x--;
+
+        if(pipe1[i].x == 125){
+            pipe1.push({
+                x: canvas.width,
+               
+                y:psh-Math.floor(Math.random()*psh)
+            
+            });
+        }
         }
         requestAnimationFrame(southPole);
     }
